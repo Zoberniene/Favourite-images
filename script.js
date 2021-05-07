@@ -36,3 +36,12 @@ const fetchData = async () => {
   waitForResponse = false;
 };
 fetchData();
+
+//------------------------------infinite scroll-------------------------------
+
+window.addEventListener("scroll", () => {
+  const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
+  if (scrollTop + clientHeight > scrollHeight - 5 && !waitForResponse) {
+    fetchData();
+  }
+});
