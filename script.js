@@ -21,6 +21,10 @@ const fetchData = async () => {
 
       const wrapper = document.createElement("div");
       const picture = document.createElement("img");
+      const wrapper_over = document.createElement("div");
+      wrapper_over.innerHTML = `<h2>${photo.title.slice(0, 18)}</h2><hr><p>${
+        photo.ownername
+      }</p><button class="favourite">Favourite</button>`;
 
       picture.src = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_w.jpg`;
       //console.log(picture.src);  //some pictures repeat, but they have different id's
@@ -28,7 +32,8 @@ const fetchData = async () => {
       //-----------------add new elements to container----------------------
 
       wrapper.classList.add("wrap");
-      wrapper.append(picture);
+      wrapper_over.classList.add("img-over");
+      wrapper.append(picture, wrapper_over);
       container.append(wrapper);
     });
   } catch (error) {
