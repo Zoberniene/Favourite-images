@@ -27,6 +27,7 @@ const fetchData = async () => {
 
       //-----------------add new elements to container----------------------
 
+      wrapper.classList.add("wrap");
       wrapper.append(picture);
       container.append(wrapper);
     });
