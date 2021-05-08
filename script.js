@@ -36,6 +36,33 @@ const fetchData = async () => {
       wrapper.append(picture, wrapper_over);
       container.append(wrapper);
     });
+
+    document.querySelectorAll(".favourite").forEach((item) => {
+      item.addEventListener("click", () => {
+        if (item.innerText === "Favourite") {
+          //change button favourite/unfavourite according to it's innerText
+          item.innerText = "Unfavourite";
+
+          favourited = localStorage.getItem("favourited");
+          /*that items saved in localStorage won't be lost after the webpage is refreshed, 
+               checks if there is data (then returns it),
+               if not, then gives an empty array*/
+          favourited = favourited ? JSON.parse(favourited) : [];
+          favourited.push(item.parentNode.parentNode.firstChild.src);
+          localStorage.setItem("favourited", JSON.stringify(favourited));
+        } else {
+          item.innerText = "Favourite";
+
+          for (let i = 0; i < favourited.length; i++) {
+            if (favourited[i] === item.parentNode.parentNode.firstChild.src) {
+              localStorage.clear();
+              favourited.splice(i, 1);
+              localStorage.setItem("favourited", JSON.stringify(favourited));
+            }
+          }
+        }
+      });
+    });
   } catch (error) {
     console.log(error);
   }
